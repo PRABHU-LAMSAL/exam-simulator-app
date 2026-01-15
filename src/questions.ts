@@ -1,0 +1,2698 @@
+export type Question = {
+  id: string;
+  text: string;
+  options: string[];
+  answerIndex: number;
+  explanation?: string;
+};
+
+// NHPC License Exam Questions
+const baseQuestions: Question[] = [
+  {
+    id: 'q1',
+    text: "District Health Information System (DHIS-2) was formally launched in Nepal in:",
+    options: [
+      '7 Mangsir 2073',
+      '8 Mangsir 2073',
+      '7 Mangsir 2072',
+      '8 Mangsir 2074'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q2',
+    text: 'All are included in principle of management except:',
+    options: [
+      'Centralization',
+      'Order',
+      'Equality',
+      'Stability of tenure'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q3',
+    text: 'MAPOWER policy related to:',
+    options: [
+      'Alcohol control',
+      'Staff control',
+      'Population control',
+      'Tobacco control'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q4',
+    text: 'In revised HMIS tools, PAL smoking cessation register belongs to:',
+    options: [
+      '5.6',
+      '6.5',
+      '6.6',
+      '7.6'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q5',
+    text: 'When Healthcare technology policy was made in:',
+    options: [
+      '2004',
+      '2005',
+      '2006',
+      '2007'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q6',
+    text: 'Northern blot test to detect:',
+    options: [
+      'The presence of specific DNA',
+      'The presence of specific RNA',
+      'The presence of albumin in urine',
+      'The presence of blood clots'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q7',
+    text: 'In which distance trained TBA should be available for reproductive age group?',
+    options: [
+      'At least 15 minute walk',
+      'At least 30 minutes walk',
+      'At least 60 minutes walk',
+      'At least 2 hours walk'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q8',
+    text: 'Primary Health Care (PHC) is implemented in Nepal:',
+    options: [
+      'May 1972',
+      'May 1977',
+      'Oct 1979',
+      'Oct 1980'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q9',
+    text: "A village with 1000 population was surveyed for 1 year and 20 were found to be diseased. Assuming that the disease lasts for 4 years, then what is the prevalence rate?",
+    options: [
+      '20/1000',
+      '40/1000',
+      '80/1000',
+      'none'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q10',
+    text: 'In which of the following does the organism multiplies?',
+    options: [
+      'Host',
+      'Reservoir',
+      'Source',
+      'Etiological agent'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q11',
+    text: 'Linear acceleration & cobalt machine equipment for treating patient are likely to be found in:',
+    options: [
+      'Tuberculosis centre',
+      'Hospital for tropical medicine',
+      'Cancer hospital',
+      'Medical hospital'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q12',
+    text: 'The thoracic duct drains:',
+    options: [
+      'Arterial blood',
+      'Venous blood',
+      'both',
+      'chyle'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q13',
+    text: 'Role of antibiotics in pertussis is to:',
+    options: [
+      'Reduce the severity of spasm',
+      'Reduce the frequency of spasm',
+      'Shorten the duration of illness',
+      'Control the secondary bacterial infection'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q14',
+    text: 'Most common tapeworm in Nepal:',
+    options: [
+      'Ascaris lumbricoides',
+      'T. Solium',
+      'T. Saginata',
+      'both B & C'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q15',
+    text: 'Except in higher doses, chlorination has no effect on all except:',
+    options: [
+      'Bacterial spores',
+      'Protozoal cyst',
+      'Helminthic ova, polio & hepatitis virus',
+      'Salmonella'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q16',
+    text: 'All of the following disease are water borne disease except:',
+    options: [
+      'Typhoid',
+      'Cholera',
+      'Hepatitis B',
+      'Shigellosis'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q17',
+    text: 'Biological hazards of water is:',
+    options: [
+      'TB',
+      'Cancer',
+      'Diarrhoea',
+      'Malaria'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q18',
+    text: 'Weight gain in first 3 month of life is:',
+    options: [
+      '800gms/months',
+      '400gms/months',
+      '200gms/months',
+      '100gms/months'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q19',
+    text: "Which of the following is not features of Down's syndrome?",
+    options: [
+      'Lax joint',
+      'low arched palate',
+      'Hernia',
+      'Simian crease'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q20',
+    text: '"Grains of salt" appearance is seen in:',
+    options: [
+      'Measles',
+      'Mumps',
+      'Typhoid',
+      'Syphilis'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q21',
+    text: 'Unconjugated bilirubin is:',
+    options: [
+      'Indirect bilirubin',
+      'Water soluble bilirubin',
+      'Direct bilirubin',
+      'Both B & C'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q22',
+    text: 'Jaundice is visible when plasma bilirubin is:',
+    options: [
+      '>3mmol/L',
+      '>15mmol/L',
+      '>30mmol/L',
+      '>35mmol/L'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q23',
+    text: 'Clubbing is seen in:',
+    options: [
+      'Ear',
+      'Eye',
+      'Nose',
+      'None'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q24',
+    text: 'Which of the following is not microcytic anemia?',
+    options: [
+      'Thalassemia',
+      'Iron Deficiency anemia',
+      'Anemia of chronic disease',
+      'Vitamin B12 Deficiency anemia'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q25',
+    text: 'Drops is noted as:',
+    options: [
+      'gtt',
+      'Q2h',
+      'State',
+      'None'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q26',
+    text: 'Which of the drug can be given for ventricular arrhythmias due to drug toxicity?',
+    options: [
+      'IV fluids',
+      'Antibiotics',
+      'Lidocaine',
+      'Activated charcoal'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q27',
+    text: 'Initiate fluid resuscitation for trauma patients in hemorrhagic shock is:',
+    options: [
+      'Normal saline',
+      'Dextrose',
+      'Ringer lactate',
+      'All'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q28',
+    text: 'Which of the following hypersensitivity reaction is cell mediated?',
+    options: [
+      'Type-I',
+      'Type-II',
+      'Type-III',
+      'Type-IV'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q29',
+    text: 'Lipoma is an example of:',
+    options: [
+      'Bacterial infection',
+      'Viral infection',
+      'Tumor',
+      'Malignant carcinoma'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q30',
+    text: 'Which of the following is used in treatment of carbuncle:',
+    options: [
+      'Sodium chloride',
+      'Magnesium sulphate (MgSO4)',
+      'Potassium hydroxide',
+      'All'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q31',
+    text: 'Aseptic dilatation of pelvicalyceal system is:',
+    options: [
+      'Hydronephrosis',
+      'Pylonephrosis',
+      'UTI',
+      'Renal carcinoma'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q31a',
+    text: 'Which of the following is not the triad of pyonephrosis?',
+    options: [
+      'Anemia',
+      'Fever',
+      'Loin Swelling',
+      'Pain'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q32',
+    text: 'Earliest sign of increased ICP is:',
+    options: [
+      'Decrease level of consciousness',
+      'Widening pulse pressure',
+      'Both',
+      'Bradycardia'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q33',
+    text: 'Commonest site for diabetic ulcer is:',
+    options: [
+      'Leg',
+      'Back',
+      'Foot',
+      'Scrotum'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q34',
+    text: 'Refractive index of human eye is:',
+    options: [
+      '1.29',
+      '2.29',
+      '3.39',
+      '4.49'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q35',
+    text: 'Stone formation in nasal cavity is:',
+    options: [
+      'Rhinoscleroma',
+      'Rhinosporidiosis',
+      'Both',
+      'Rhinolith'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q36',
+    text: 'In permanent dentition eruption of all teeth (except wisdom teeth) complete by the age of:',
+    options: [
+      '10years',
+      '11years',
+      '12years',
+      '13years'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q37',
+    text: 'PH of vagina is:',
+    options: [
+      '1.5',
+      '4.0',
+      '4.8',
+      '5.9'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q38',
+    text: 'Which of the following is related to limbs:',
+    options: [
+      'Chorioretinitis',
+      'Hemangioma',
+      'Meromelia',
+      'Microphthalmia'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q39',
+    text: 'Preventive method to help women avoid unwanted pregnancy is called:',
+    options: [
+      'Planning method',
+      'Contraceptive method',
+      'Preventive method',
+      'All'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q40',
+    text: 'Lippes loop works by:',
+    options: [
+      'Causing foreign body reaction impairing the viability of gamete',
+      'Thickening of endometrium',
+      'Making endometrial wall unfavourable for implantation',
+      'Acting as spermicidal'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q41',
+    text: 'The best contraceptive method for lactating mother is:',
+    options: [
+      'Minipills',
+      'Depo',
+      'IUCD',
+      'Both a & b'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q42',
+    text: 'To be eligible to complete in internal competition for 5th level, one should work at least:',
+    options: [
+      '2 years',
+      '3 years',
+      '5 years',
+      '7 years'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q43',
+    text: 'Nepal Health Service Regulation has:',
+    options: [
+      '11 section & 96 rules',
+      '16 section & 132 rules',
+      '132 & 16',
+      '14 & 96'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q44',
+    text: "All of the following are true about 15th years plan except:",
+    options: [
+      'Under 5years mortality rate: 24',
+      'Neonatal Mortality rate: 34',
+      'Maternal Mortality rate: 99',
+      'Under Weight(%): 15'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q45',
+    text: 'Micronutrient Powder program started from:',
+    options: [
+      '2 district',
+      '3 district',
+      '5 district',
+      '6 district'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q46',
+    text: 'Safe Motherhood & reproductive health Right Act comes in:',
+    options: [
+      '2075-5-2',
+      '2075-6-2',
+      '2076-5-2',
+      '2076-6-2'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q47',
+    text: 'International day of the midwife celebrated on:',
+    options: [
+      '3 May',
+      '5 May',
+      '3 April',
+      '5 April'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q48',
+    text: 'Globulin is needed not only for immunity but also for:',
+    options: [
+      'Oncotic pressure',
+      'Clotting',
+      'Transportation',
+      'Viscosity'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q49',
+    text: 'The affinity of Hb for CO is higher than oxygen by:',
+    options: [
+      '100-150',
+      '150-200',
+      '200-250',
+      '250-300'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q50',
+    text: 'The major ion present in extracellular fluid is:',
+    options: [
+      'Sodium',
+      'Potassium',
+      'Calcium',
+      'Bicarbonate'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q51',
+    text: 'What is the percentage of oxygen in expired air?',
+    options: [
+      '21%',
+      '16%',
+      '8%',
+      '4%'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q52',
+    text: 'Maximum oxygen (97%) is transported in the form of:',
+    options: [
+      'Carbonic acid',
+      'Bicarbonate',
+      'Oxyhemoglobin',
+      'Carbaminohemoglobin'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q53',
+    text: 'Which of the following gases binds strongly with hemoglobin?',
+    options: [
+      'Oxygen (O2)',
+      'Carbon dioxide (CO2)',
+      'Carbon monoxide (CO)',
+      'Nitrogen'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q54',
+    text: 'How much oxygen can 1 gram of hemoglobin carry?',
+    options: [
+      '1.34 ml',
+      '2.24 ml',
+      '3.34 ml',
+      '4.34 ml'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q55',
+    text: 'Where is the respiratory center located?',
+    options: [
+      'Cerebrum',
+      'Hypothalamus',
+      'Medulla oblongata',
+      'Spinal cord'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q56',
+    text: "What is the condition called when a person has difficulty breathing while lying down flat?",
+    options: [
+      'Apnea',
+      'Hyperpnea',
+      'Dyspnea',
+      'Orthopnea'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q57',
+    text: 'Inflammation of the lung parenchyma is called:',
+    options: [
+      'Pleuritis',
+      'Pneumonia',
+      'Bronchitis',
+      'Tuberculosis'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q58',
+    text: 'What is the weight of the heart?',
+    options: [
+      '150 gm',
+      '200 gm',
+      '300 gm',
+      '500 gm'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q59',
+    text: 'The busiest organ of the body is:',
+    options: [
+      'Eye',
+      'Lungs',
+      'Heart',
+      'Tongue'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q60',
+    text: 'The bluish discoloration of the skin and mucous membrane is called:',
+    options: [
+      'Pallor',
+      'Icterus',
+      'Cyanosis',
+      'Clubbing'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q61',
+    text: 'Cyanosis is due to:',
+    options: [
+      'Increased level of reduced hemoglobin (>5gm%)',
+      'Decreased level of reduced hemoglobin (<5gm%)',
+      'Increased level of normal hemoglobin',
+      'Decreased level of normal hemoglobin'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q62',
+    text: 'The most common cause of under-five mortality is:',
+    options: [
+      'ARI',
+      'Pneumonia',
+      'Malnutrition',
+      'Diarrhea'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q63',
+    text: 'The most common cause of neonatal mortality is:',
+    options: [
+      'Hypothermia',
+      'Infection',
+      'Birth Asphyxia',
+      'Preterm birth'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q64',
+    text: 'How many layers form the wall of the heart?',
+    options: [
+      '2',
+      '3',
+      '4',
+      '5'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q65',
+    text: 'Which artery supplies blood to the heart?',
+    options: [
+      'Carotid artery',
+      'Subclavian artery',
+      'Coronary artery',
+      'Cardiac artery'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q66',
+    text: 'If the heart has 2 Auricles and 2 Ventricles, how many valves are there?',
+    options: [
+      '2',
+      '4',
+      '6',
+      '8'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q67',
+    text: 'The heart receives blood during:',
+    options: [
+      'Systolic Phase',
+      'Diastolic phase',
+      'Both A & B',
+      'None'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q68',
+    text: 'Which valve is located between the right atrium and the right ventricle?',
+    options: [
+      'Bicuspid valve',
+      'Tricuspid valve',
+      'Pulmonary valve',
+      'Cardiac valve'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q69',
+    text: 'The apex of the heart is formed by:',
+    options: [
+      'Right auricle',
+      'Right ventricle',
+      'Left auricle',
+      'Left ventricle'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q70',
+    text: "What is known as the 'pacemaker' of the heart?",
+    options: [
+      'AV node',
+      'SA node',
+      'AV bundle',
+      'Purkinje fiber'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q71',
+    text: 'Ions required for the contraction of the heart are all EXCEPT:',
+    options: [
+      'Sodium',
+      'Calcium',
+      'Phosphorus',
+      'Potassium'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q72',
+    text: 'What is the normal fetal heart rate?',
+    options: [
+      '130-140/min',
+      '120-160/min',
+      '100-120/min',
+      '60-80/min'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q73',
+    text: 'The normal heart rate for an adult is:',
+    options: [
+      '50-60/min',
+      '60-80/min',
+      '80-100/min',
+      '100-110/min'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q74',
+    text: 'What is a pulse rate greater than 100 beats per minute called?',
+    options: [
+      'Bradycardia',
+      'Tachycardia',
+      'Tachypnea',
+      'Hyperpnea'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q75',
+    text: 'What is the effect of the Sympathetic Nervous System on the heart?',
+    options: [
+      'Increase BP',
+      'Decrease BP',
+      'Increase Pulse',
+      'Decrease Pulse'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q76',
+    text: 'All of the following cause tachycardia EXCEPT:',
+    options: [
+      'Fever',
+      'Emotion',
+      'Fear',
+      'Exercise'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q77',
+    text: 'Who among the following has the lowest pulse rate?',
+    options: [
+      'Pregnant woman',
+      'Infant',
+      'Athletes',
+      'Children'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q78',
+    text: 'The duration of one cardiac cycle is:',
+    options: [
+      '0.1 Second',
+      '0.3 Second',
+      '0.5 Second',
+      '0.8 Second'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q79',
+    text: 'The amount of blood pumped by the heart in one beat is called:',
+    options: [
+      'Stroke volume',
+      'Blood volume',
+      'Cardiac output',
+      'Cardiac blood'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q80',
+    text: 'Blood pressure depends on:',
+    options: [
+      'Cardiac output',
+      'Age',
+      'Peripheral resistance',
+      'All'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q81',
+    text: 'What is the condition of high potassium level in the blood called?',
+    options: [
+      'Hyponatremia',
+      'Hypokalemia',
+      'Hyperkalemia',
+      'Hypernatremia'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q82',
+    text: "All of the following are Isotonic solutions EXCEPT:",
+    options: [
+      '0.9% sodium chloride',
+      "Ringer's lactate",
+      '5% dextrose',
+      '0.45% sodium chloride'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q83',
+    text: 'Phimosis is most common in:',
+    options: [
+      'Young males',
+      'Young females',
+      'Older males',
+      'Older females'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q84',
+    text: 'Anemia can be observed in all of the following EXCEPT:',
+    options: [
+      'Palpebral conjunctiva',
+      'Bulbar conjunctiva',
+      'Palms',
+      'Tongue'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q85',
+    text: 'In severe dehydration, how much does body weight decrease?',
+    options: [
+      '5%',
+      '5-10%',
+      '10%',
+      '15%'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q86',
+    text: 'Which system regulates the pH of the body?',
+    options: [
+      'Renal system',
+      'Respiratory system',
+      'Buffer system',
+      'All'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q87',
+    text: 'The most important buffer in the human body is:',
+    options: [
+      'Bicarbonate buffer',
+      'Hemoglobin buffer',
+      'Protein buffer',
+      'Phosphate buffer'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q88',
+    text: 'The most powerful buffer in the human body is:',
+    options: [
+      'Phosphate buffer',
+      'Bicarbonate buffer',
+      'Hemoglobin buffer',
+      'Protein buffer'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q89',
+    text: '"Ketoacidosis" is most common in:',
+    options: [
+      'Typhoid',
+      'Hypertension',
+      'Diabetes',
+      'Diarrhea'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q90',
+    text: 'Which system does the spleen belong to?',
+    options: [
+      'Digestive system',
+      'Respiratory system',
+      'Lymphatic system',
+      'Cardiovascular system'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q91',
+    text: 'How much lymph is present in the human body?',
+    options: [
+      '1 liter',
+      '2 liters',
+      '3 liters',
+      '5 liters'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q92',
+    text: 'Colorless tissue fluid containing mainly lymphocytes, less protein, and no RBCs:',
+    options: [
+      'Serum',
+      'Lymph',
+      'Blood',
+      'Bile'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q93',
+    text: 'Inflammation of a lymph vessel is called:',
+    options: [
+      'Lymphadenitis',
+      'Lymphangitis',
+      'Lymphadenopathy',
+      'Lymphitis'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q94',
+    text: 'Which of the following diseases affects the lymphatic system?',
+    options: [
+      'Malaria',
+      'Kala-azar',
+      'Filariasis',
+      'Poliomyelitis'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q95',
+    text: '"Chyluria" is seen in:',
+    options: [
+      'UTI',
+      'Diabetes',
+      'Hypertension',
+      'Filariasis'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q96',
+    text: 'Humoral immunity is produced by:',
+    options: [
+      'T-lymphocyte',
+      'B-lymphocyte',
+      'Monocyte',
+      'Neutrophil'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q97',
+    text: 'Which antibody can cross the placenta?',
+    options: [
+      'IgA',
+      'IgG',
+      'IgM',
+      'IgE'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q98',
+    text: 'Which antibody is found in breast milk?',
+    options: [
+      'IgA',
+      'IgG',
+      'IgM',
+      'IgD'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q99',
+    text: 'What type of immunity does a fetus get from the mother?',
+    options: [
+      'Active Natural',
+      'Passive natural',
+      'Active artificial',
+      'Passive artificial'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q100',
+    text: 'Which type of immunity is obtained by immunization?',
+    options: [
+      'Active natural',
+      'Active artificial',
+      'Passive natural',
+      'Passive artificial'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q101',
+    text: 'Which of the following is NOT a live vaccine?',
+    options: [
+      'BCG',
+      'Rabies',
+      'OPV',
+      'Measles'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q102',
+    text: "'TT' is what type of vaccine?",
+    options: [
+      'Live attenuated',
+      'Killed',
+      'Toxoid',
+      'Combined'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q103',
+    text: 'Which vaccine should NOT be given intramuscularly?',
+    options: [
+      'DPT',
+      'TT',
+      'BCG',
+      'Both a & b'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q104',
+    text: 'The most heat-sensitive vaccine is:',
+    options: [
+      'BCG',
+      'Measles',
+      'OPV',
+      'IPV'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q105',
+    text: 'By which route is the Measles vaccine administered?',
+    options: [
+      'Intradermal',
+      'Oral',
+      'Intramuscular',
+      'Subcutaneous'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q106',
+    text: 'Which infants should NOT be given the BCG vaccine?',
+    options: [
+      'HIV/AIDS',
+      'Family history of TB',
+      'Taking Corticosteroids',
+      'All'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q107',
+    text: 'DPT vaccine does not protect against:',
+    options: [
+      'Tetanus',
+      'Pertussis',
+      'Diphtheria',
+      'Polio'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q108',
+    text: 'When was HIV first identified in Nepal?',
+    options: [
+      '1981',
+      '1983',
+      '1986',
+      '1988'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q109',
+    text: 'AIDS is caused by:',
+    options: [
+      'DNA virus',
+      'Adeno virus',
+      'Retro virus',
+      'Entero virus'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q110',
+    text: 'The following are strongly associated with H. pylori infections except:',
+    options: [
+      'Duodenal ulcer',
+      'Gastric ulcer',
+      'Stomach cancer',
+      'Gastro-esophageal reflux'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q111',
+    text: 'Acute circulatory collapse is a feature of which of the following snake bite?',
+    options: [
+      'Cobra',
+      'Krait',
+      "Russell's viper",
+      'Pacific ocean snake'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q112',
+    text: 'What feature is not a symptom of anxiety disorder?',
+    options: [
+      'Palpitation',
+      'Fear of getting something wrong',
+      'Elated mood',
+      'Fearfulness'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q113',
+    text: 'Folic acid deficiency in 1st trimester increases risk of:',
+    options: [
+      'Meningomyelocele',
+      'Respiratory distress',
+      'Diaphragmatic hernia',
+      'Heart defect'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q114',
+    text: 'Which of the following are minor criteria for RHD?',
+    options: [
+      'Chorea',
+      'Carditis',
+      'Arthralgia',
+      'Arthritis'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q115',
+    text: 'Antigen present in early HIV infections:',
+    options: [
+      'p21',
+      'p22',
+      'p23',
+      'p24'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q116',
+    text: 'True about the anterior pituitary gland:',
+    options: [
+      'Regulated by releasing hormone from hypothalamus',
+      'Secretes ADH',
+      'Functions independently',
+      'Secretes only one hormone'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q117',
+    text: 'Most common cause of per-rectal bleeding in a child:',
+    options: [
+      'Rectal polyp',
+      'Intussusception',
+      "Meckel's diverticulum",
+      'Peptic ulcer'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q118',
+    text: 'Which of the following statements is not true?',
+    options: [
+      'Commonest cause of PPH is Atonic uterus',
+      'Commonest site of ectopic is ampulla',
+      'Misoprostol used in abortion',
+      'Commonest complication of eclampsia is hemorrhage'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q119',
+    text: 'Which virus is not transmitted by respiratory route?',
+    options: [
+      'Measles',
+      'Poliomyelitis',
+      'Rhinovirus',
+      'Varicella zoster'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q120',
+    text: 'The symptom of cataract include all, except:',
+    options: [
+      'Pain',
+      'Blurred vision',
+      'Clear vision in dusk',
+      'Double vision'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q121',
+    text: 'Nepal Health sector plan II is a:',
+    options: [
+      'Periodic sector reform plan',
+      'Governance only plan',
+      'Technical only plan',
+      'None'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q122',
+    text: 'Morbidity in a community is best estimated by:',
+    options: [
+      'Active surveillance',
+      'Sentimental surveillance',
+      'Passive surveillance',
+      'Monitoring'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q123',
+    text: 'In national AIDS control program, targeted interventions are for:',
+    options: [
+      'High risk population',
+      'Workplace',
+      'STD treatment',
+      'Multi-sectoral'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q124',
+    text: 'Weight of the placenta at term is:',
+    options: [
+      '500 gm',
+      '1000 gm',
+      '120 gm',
+      '1500 gm'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q125',
+    text: 'Occupation-related prolong respiratory problem in asbestos worker:',
+    options: [
+      'Bronchogenic carcinoma',
+      'Tuberculosis',
+      'Lung fibrosis',
+      'Mesothelioma'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q126',
+    text: 'Commonest cause of Hepatitis in Nepal:',
+    options: [
+      'Hep A',
+      'Hep B',
+      'Hep E',
+      'Hep D'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q127',
+    text: 'RTA patient with hypotension, most likely ruptured organ:',
+    options: [
+      'Rectum',
+      'Kidney',
+      'Spleen',
+      'Mesentery'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q128',
+    text: 'Earliest symptom of menopause:',
+    options: [
+      'Spotting',
+      'Hot flushes',
+      'Osteoporosis',
+      'Vaginal discharge'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q129',
+    text: 'Initial and most sensitive investigation for myocardial infarction:',
+    options: [
+      'Echo',
+      'CPK-MB',
+      'Troponin-I',
+      'ECG'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q130',
+    text: 'Most common cause of hematemesis?',
+    options: [
+      'Liver cirrhosis',
+      'Peptic ulcer',
+      'Lung cancer',
+      'Tuberculosis'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q131',
+    text: 'Which of the following is not the clinical feature of liver cirrhosis?',
+    options: [
+      'Spider nevi',
+      'Asterixis',
+      'Splenomegaly',
+      'Dehydration'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q132',
+    text: 'Monitoring is the part of:',
+    options: [
+      'Program evaluation',
+      'Implementation',
+      'Planning',
+      'Strategy'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q133',
+    text: 'Target Therapy is used for treatment of:',
+    options: [
+      'Diabetes',
+      'Cancer',
+      'Hypertension',
+      'HIV/AIDS'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q134',
+    text: 'Cotrimoxazole during pregnancy may cause:',
+    options: [
+      'CVD',
+      'Joint pain',
+      'Methemoglobinemia',
+      'Hepatitis'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q135',
+    text: 'A prodrug is:',
+    options: [
+      'Prototype member',
+      'Oldest member',
+      'Inactive drug transformed to active',
+      'Stored drug'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q136',
+    text: 'Monkeypox is caused by:',
+    options: [
+      'Orthomyxovirus',
+      'Orthopoxvirus',
+      'Paramyxovirus',
+      'Poxvirus'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q137',
+    text: 'Hyperosmolar non ketotic coma is complication of:',
+    options: [
+      'Type-1 Diabetes',
+      'Type-II Diabetes',
+      'Hypertension',
+      'Head injury'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q138',
+    text: 'World leprosy day is celebrated on:',
+    options: [
+      'Last Sunday of Feb',
+      'Last Sunday of Jan',
+      'Last Sunday of Mar',
+      'Last Sunday of April'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q139',
+    text: 'Enamel spot is seen in:',
+    options: [
+      'Marasmus',
+      'Kwashiorkor',
+      'MI',
+      'Cancer'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q140',
+    text: 'Cinchonism is side effect of:',
+    options: [
+      'Quinine',
+      'Primaquine',
+      'Chloroquine',
+      'ACT'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q141',
+    text: 'Analytical studies are undertaken to:',
+    options: [
+      'Determine occurrence',
+      'Screening',
+      'Test etiological hypothesis',
+      'None'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q142',
+    text: 'Village cholera epidemic 1st step to decrease death:',
+    options: [
+      'Safe water/sanitation',
+      'Vaccination',
+      'Chemoprophylaxis',
+      'Tetracycline'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q143',
+    text: 'In tuberculosis combination of Antimicrobial used:',
+    options: [
+      'Delay resistance',
+      'Reduce toxicity',
+      'Broaden spectrum',
+      'Prevent toxins'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q144',
+    text: 'Which is not true regarding rich food sources:',
+    options: [
+      'Halibut liver (Vit A/D)',
+      'Amla (Vit C)',
+      'Sheep liver (Vit B2)',
+      'Ragi (Vit B1)'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q145',
+    text: 'Element that cannot be completely supplemented by diet in pregnancy:',
+    options: [
+      'Fe',
+      'Ca++',
+      'Zn',
+      'Mn'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q146',
+    text: 'Contact between two cultures with diffusion both ways:',
+    options: [
+      'Socialization',
+      'Acculturation',
+      'Adjustment',
+      'All'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q147',
+    text: "'Most reliable' evidence of fecal contamination of water:",
+    options: [
+      'Coliform bacteria',
+      'Cl. perfringens',
+      'St. fecalis',
+      'Ch. welchii'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q148',
+    text: 'Exposure to sound causing permanent hearing loss:',
+    options: [
+      '90 dB',
+      '110 dB',
+      '160 dB',
+      '1600 dB'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q149',
+    text: 'Waste water from kitchen is called:',
+    options: [
+      'Refuse',
+      'Garbage',
+      'Sullage',
+      'Sewage'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q150',
+    text: 'Multiple itchy papular lesions on genitalia and fingers (child):',
+    options: [
+      'Papular urticaria',
+      'Scabies',
+      'Atropic dermatitis',
+      'Contact dermatitis'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q151',
+    text: 'Most commonly reported disease post-disaster:',
+    options: [
+      'ARI',
+      'Gastroenteritis',
+      'Tetanus',
+      'Malaria'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q152',
+    text: 'Effective method for motivating family planning:',
+    options: [
+      'Printed',
+      'Films',
+      'Group discussion',
+      'Interpersonal communication'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q153',
+    text: '8 month child cold/fever, rash first behind ears:',
+    options: [
+      'Rubeola',
+      'Rubella',
+      'Pertussis',
+      'Chickenpox'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q154',
+    text: 'Child irritable, skin pinch slow, sunken eyes (CB-IMNCI):',
+    options: [
+      'No dehydration',
+      'Some',
+      'Severe',
+      'Very severe'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q155',
+    text: 'Shock after severe burn is:',
+    options: [
+      'Septic',
+      'Neurogenic',
+      'Hypovolemic',
+      'Anaphylactic'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q156',
+    text: 'Most common sinusitis in childhood is:',
+    options: [
+      'Frontal',
+      'Sphenoidal',
+      'Maxillary',
+      'Ethmoidal'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q157',
+    text: "Dhobi's itch is:",
+    options: [
+      'Tinea corporis',
+      'Tinea cruris',
+      'Tinea barbae',
+      'Tinea capitis'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q158',
+    text: 'TB and Leprosy prevention in Nepal best by:',
+    options: [
+      'Education',
+      'Chemoprophylaxis',
+      'Immunoprophylaxis',
+      'Early Diagnosis/Treatment'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q159',
+    text: 'Chronic ear infection in under five management:',
+    options: [
+      'Amoxicillin',
+      'Absorb pus/dry',
+      'Cipro drops',
+      'b & c'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q160',
+    text: 'Listeria is:',
+    options: [
+      'Gram +ve cocci',
+      'Gram +ve Bacilli',
+      'Gram -ve cocci',
+      'Gram -ve Bacilli'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q161',
+    text: 'National Micronutrient status survey was in:',
+    options: [
+      '2015/2016',
+      '2014/2015',
+      '2016/2017',
+      '2013/2014'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q162',
+    text: 'Most common cause of stroke:',
+    options: [
+      'HTN',
+      'DM',
+      'Atherosclerosis',
+      'Valvular'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q163',
+    text: 'Which is bacteriostatic?',
+    options: [
+      'Penicillin',
+      'Chloramphenicol',
+      'Cipro',
+      'Cefoxitin'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q164',
+    text: 'CB-IMNCI 90% coverage target by:',
+    options: [
+      '2025',
+      '2030',
+      '2035',
+      '2020'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q165',
+    text: 'Most efficient mass media:',
+    options: [
+      'Radio',
+      'TV',
+      'Newspaper',
+      'Internet'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q166',
+    text: 'Safe Motherhood pilot program districts:',
+    options: [
+      '1997, 5',
+      '1994, 5',
+      '1997, 10',
+      '1994, 10'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q167',
+    text: 'Super infections common with:',
+    options: [
+      'Narrow',
+      'Short',
+      'Completely absorbed',
+      'Combination covering +/-'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q168',
+    text: 'P. falciparum malaria with vomiting/altered sensorium treatment:',
+    options: [
+      'Chloroquine',
+      'Primaquine',
+      'ACT',
+      'IV artesunate'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q169',
+    text: 'Which is not the tool of supervision?',
+    options: [
+      'Manual',
+      'Implementation',
+      'Checklist',
+      'Job description'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q170',
+    text: 'Evaluation done between courses:',
+    options: [
+      'Formative',
+      'Summative',
+      'Diagnostic',
+      'Placement'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q171',
+    text: 'Node of Ranvier is seen in:',
+    options: [
+      'Cell body',
+      'Dendrites',
+      'Axons',
+      'Buttons'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q172',
+    text: '10kg child severe dehydration 1st hour fluid:',
+    options: [
+      '300 ml',
+      '450 ml',
+      '750 ml',
+      '700 ml'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q173',
+    text: 'Which is not a Division of MoH?',
+    options: [
+      'Planning',
+      'Health Coordination',
+      'Curative',
+      'Administrative'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q174',
+    text: 'MoH established in:',
+    options: [
+      '1954 AD',
+      '1990 AD',
+      '2011 AD',
+      '2016 AD'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q175',
+    text: 'Role of FCHVs not assigned as:',
+    options: [
+      'Promoter',
+      'Counselor',
+      'Service provider',
+      'a & b'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q176',
+    text: 'Bacteriostatic drug becoming bactericidal at high conc:',
+    options: [
+      'Erythromycin',
+      'Tetracycline',
+      'Chloramphenicol',
+      'Ampicillin'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q177',
+    text: 'Not a morbidity indicator:',
+    options: [
+      'Notification',
+      'Prevalence',
+      'Spells',
+      'Life expectancy'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q178',
+    text: 'Disease occurring irregularly/infrequently:',
+    options: [
+      'Endemic',
+      'Epidemic',
+      'Sporadic',
+      'Exotic'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q179',
+    text: 'Man is dead end host for:',
+    options: [
+      'Rabies',
+      'Tetanus',
+      'JE',
+      'All of these'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q180',
+    text: 'Species of plasmodium causing Malaria:',
+    options: [
+      '4',
+      '3',
+      '6',
+      '5'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q181',
+    text: 'Feature of Rabies in man:',
+    options: [
+      'Abraded skin licks',
+      'Corneal transplant',
+      'Centrifugal spread',
+      'All'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q182',
+    text: 'Not true about brucellosis:',
+    options: [
+      'Farmers',
+      'Cattle reservoirs',
+      'Man-to-man transmission',
+      '1-3 weeks IP'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q183',
+    text: 'Not true about hypertension:',
+    options: [
+      'Males more',
+      'Rule of halves',
+      'Women deaths exceed men',
+      'Obesity risk'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q184',
+    text: 'Specific screening for breast cancer:',
+    options: [
+      'Self-exam',
+      'Physician exam',
+      'Mammography',
+      'Thermography'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q185',
+    text: 'Maize protein deficiency:',
+    options: [
+      'Tryptophan/Lysine',
+      'Threonine/Lysine',
+      'Leucine/Lysine',
+      'Methionine/Histidine'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q186',
+    text: 'Safe limit of fluoride in water:',
+    options: [
+      '0.1-0.3',
+      '0.5-0.8',
+      '1-1.5',
+      '3.3-3.5'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q187',
+    text: 'Index of current nutritional status:',
+    options: [
+      'Weight for age',
+      'Height for age',
+      'Weight for height',
+      'Skin fold'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q188',
+    text: 'Hepatitis A endemic area residual chlorine:',
+    options: [
+      '0.1/30 min',
+      '0.2/60 min',
+      '0.5/30 min',
+      '1/60 min'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q189',
+    text: 'Thermal comfort index accounting for air/radiant heat:',
+    options: [
+      'Cooling power',
+      'Effective temp',
+      'Corrected effective temp',
+      'None'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q190',
+    text: 'Withdrawal symptoms of tobacco:',
+    options: [
+      'Irritability',
+      'Anxiety',
+      'Tremors',
+      'All'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q191',
+    text: 'Satisfactory data collection method:',
+    options: [
+      'Oral',
+      'Postal',
+      'Experiments',
+      'First hand'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q192',
+    text: 'Educational device for school children:',
+    options: [
+      'Demo',
+      'Role playing',
+      'Stimulation',
+      'Group discussion'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q193',
+    text: 'SLTHP reduction aim for IMR:',
+    options: [
+      '39.5',
+      '34.4',
+      '40',
+      '42.5'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q194',
+    text: 'National Health policy 2071 PHCC population:',
+    options: [
+      '1 lakh',
+      '50k',
+      '20k',
+      '10k'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q195',
+    text: 'Interval between receipt of infection and maximal infectivity:',
+    options: [
+      'Incubation',
+      'Generation time',
+      'Latent',
+      'Communicable'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q196',
+    text: 'True about measles EXCEPT:',
+    options: [
+      'IP 10-14 days',
+      'SAR 30%',
+      'Severe in malnutrition',
+      'Subclinical can occur'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q197',
+    text: 'Not true about diphtheria:',
+    options: [
+      'Grayish membrane',
+      'Easily removed',
+      'Minimal erythema',
+      'Cutaneous common'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q198',
+    text: 'Child with paroxysmal cough and sub-conjunctival hemorrhage:',
+    options: [
+      'Measles',
+      'Mumps',
+      'Rubella',
+      'Whooping cough'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q199',
+    text: 'Prevent TB resistance EXCEPT:',
+    options: [
+      'Combinations',
+      'Community sensitivity',
+      'Prompt defaulter action',
+      'Pretreatment culture'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q200',
+    text: 'Serological marker for immunity from vaccination:',
+    options: [
+      'HbeAb',
+      'HBcAg',
+      'HBsAb',
+      'HBcAb'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q201',
+    text: 'Glucose in ORS because it:',
+    options: [
+      'Changes taste',
+      'Increases absorption salt/water',
+      'Amino acid absorption',
+      'All'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q202',
+    text: 'Control hookworm EXCEPT:',
+    options: [
+      'Health education',
+      'Footwear',
+      'Latrine',
+      'Safe water'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q203',
+    text: 'Not true about malaria:',
+    options: [
+      'Newborn resistance',
+      'Adults gametocyte carriers',
+      'Sickle cell milder',
+      'Duffy negative resistant'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q204',
+    text: 'Measure of operational efficiency:',
+    options: [
+      'API',
+      'AEBR',
+      'SPR',
+      'AFI'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q205',
+    text: 'Integrated vector control means:',
+    options: [
+      'Antiadult+Antilarval',
+      'Source reduction+Antiadult',
+      'Bioenvironmental+Protection',
+      'All of the above'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q206',
+    text: 'National Tuberculosis Center is in:',
+    options: [
+      'Kathmandu',
+      'Pokhara',
+      'Bhaktapur',
+      'Lalitpur'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q207',
+    text: 'Responsible for Safe Motherhood at District level:',
+    options: [
+      'FP supervisor',
+      'PH Nurse',
+      'Staff Nurse',
+      'Immunization supervisor'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q208',
+    text: 'FCHV day is celebrated on:',
+    options: [
+      'Dec 1',
+      'Aug 1',
+      'Oct 1',
+      'Dec 5'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q209',
+    text: 'Gap between PHC/ORC and EPI/ORC:',
+    options: [
+      '5 days',
+      '10 days',
+      '15 days',
+      '20 days'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q210',
+    text: 'Graphic representation of disease manifestations variations:',
+    options: [
+      'Spectrum',
+      'Natural history',
+      'Epidemiological',
+      'Ecology'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q211',
+    text: 'Infection in man and animals transmitted in either direction:',
+    options: [
+      'Epiornithic',
+      'Anthropozoonoses',
+      'Zooanthroponoses',
+      'Amphixenoses'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q212',
+    text: 'Contraindications to pertussis EXCEPT:',
+    options: [
+      'Epilepsy',
+      'Any febrile upset',
+      'Previous reaction',
+      'Children below 2 years'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q213',
+    text: 'Most effective method for vector control:',
+    options: [
+      'Anti-adult',
+      'Minor environmental',
+      'Removal of pistia',
+      'Anti-larval'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q214',
+    text: 'Best parameter for assessing physical growth:',
+    options: [
+      'Height/age',
+      'Weight/age',
+      'Chest circ',
+      'Weight/height'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q215',
+    text: 'Breast feeding started within:',
+    options: [
+      '1 hour',
+      '2 hour',
+      '24 hour',
+      '72 hour'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q216',
+    text: 'Diarrhea for 14 days no dehydration:',
+    options: [
+      'Severe persistent',
+      'Dysentery',
+      'Severe dysentery',
+      'Persistent diarrhea'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q217',
+    text: 'Diabetic mother gives birth to:',
+    options: [
+      'Small baby',
+      'Big baby',
+      'Dead baby',
+      'Normal baby'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q218',
+    text: 'Immediate treatment for night blindness:',
+    options: [
+      'Topical Vit A',
+      'Oral Vit A',
+      'Parenteral Vit A',
+      'Any'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q219',
+    text: 'Which is a prodrug:',
+    options: [
+      'Hydralazine',
+      'Clonidine',
+      'Captopril',
+      'Enalapril'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q220',
+    text: 'Primary Health Care definition source:',
+    options: [
+      'Basic',
+      'Comprehensive',
+      'Primary',
+      'Integrated'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q221',
+    text: 'Resistance level of a community:',
+    options: [
+      'Passive',
+      'Active',
+      'Herd',
+      'None'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q222',
+    text: 'Commonest cause of anemia in childhood:',
+    options: [
+      'B12',
+      'Folic acid',
+      'Pyridoxine',
+      'Iron'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q223',
+    text: 'Risk from ozone depletion:',
+    options: [
+      'Digestive',
+      'Liver cancer',
+      'Neurological',
+      'Skin cancer'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q224',
+    text: 'Not a major role of HP In-charge:',
+    options: [
+      'Exam',
+      'Recording',
+      'Conducting vaccination',
+      'Supervision'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q225',
+    text: 'FCHV functions EXCEPT:',
+    options: [
+      'Vit A',
+      'Polio drops',
+      'Oral contraceptives',
+      'Malaria surveillance'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q226',
+    text: 'Not a multilateral partner in Nepal:',
+    options: [
+      'USAID',
+      'UNFPA',
+      'UNICEF',
+      'WHO'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q227',
+    text: 'Protein deficiency with edema and hair discoloration:',
+    options: [
+      'Kwashiorkor',
+      'Marasmus',
+      'Stunting',
+      'Underweight'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q228',
+    text: 'Article for "Right to Health" in Constitution of Nepal:',
+    options: [
+      '33',
+      '35',
+      '37',
+      '39'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q229',
+    text: 'Counselling is important because:',
+    options: [
+      'Rapport',
+      'Client decision',
+      'Solves problems',
+      'Patience'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q230',
+    text: 'First in health planning cycle:',
+    options: [
+      'Identifying',
+      'Community assessment',
+      'Community diagnosis',
+      'Setting priorities'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q231',
+    text: 'Endemic means:',
+    options: [
+      'More than one area',
+      'More than one season',
+      'Constantly present',
+      'More than expected'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q232',
+    text: 'Confusion, salivation, lacrimation, mitosis (pinpoint pupils), tachycardia poison:',
+    options: [
+      'Opium',
+      'Organophosphorus',
+      'Dhatura',
+      'Organochlorine'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q233',
+    text: 'Earliest clinical sign of improvement in PEM:',
+    options: [
+      'Hair color',
+      'Appetite gain',
+      'Weight gain',
+      'Height gain'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q234',
+    text: 'Neonatal thyroid screening blood specimen:',
+    options: [
+      'Cord blood',
+      '24 hrs',
+      '48 hrs',
+      '72 hrs'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q235',
+    text: 'HbA1c level explains:',
+    options: [
+      'Acute sugar',
+      'Long term sugar status',
+      'Hepatorenal',
+      'Pancreatitis'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q236',
+    text: 'Starch is a:',
+    options: [
+      'Polysaccharide',
+      'Monosaccharide',
+      'Disaccharide',
+      'None'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q237',
+    text: 'Gram-positive color:',
+    options: [
+      'Purple',
+      'Pink',
+      'Colorless',
+      'Green'
+    ],
+    answerIndex: 0
+  },
+  {
+    id: 'q238',
+    text: 'Ability to influence beliefs/actions of others:',
+    options: [
+      'Authority',
+      'Responsibility',
+      'Power',
+      'Decentralization'
+    ],
+    answerIndex: 2
+  },
+  {
+    id: 'q239',
+    text: 'Safe Motherhood AD from 10 districts:',
+    options: [
+      '1990',
+      '1994',
+      '1996',
+      '1997'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q240',
+    text: 'Malaria eradication program launched in:',
+    options: [
+      '1954',
+      '1958',
+      '1962',
+      '1964'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q241',
+    text: "Hansen's disease is:",
+    options: [
+      'TB',
+      'Leprosy',
+      'AIDS',
+      'Trachoma'
+    ],
+    answerIndex: 1
+  },
+  {
+    id: 'q242',
+    text: 'Rice-water stools characteristic of:',
+    options: [
+      'Giardiasis',
+      'Typhoid',
+      'Amoebiasis',
+      'Cholera'
+    ],
+    answerIndex: 3
+  },
+  {
+    id: 'q243',
+    text: 'Gene-Xpert is a:',
+    options: [
+      'Diagnosis tool for TB',
+      'Leprosy tool',
+      'Expert person',
+      'None'
+    ],
+    answerIndex: 0
+  }
+];
+
+// Export all questions - they will be randomized when starting an exam
+export const sampleQuestions: Question[] = baseQuestions;
