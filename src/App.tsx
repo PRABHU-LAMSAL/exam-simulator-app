@@ -1,12 +1,53 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Question, sampleQuestions } from './questions';
 
-type Phase = 'login' | 'dashboard' | 'exam' | 'result' | 'review';
+type Phase = 'login' | 'dashboard' | 'exam' | 'result' | 'review' | 'progress';
 
 type AnswerMap = Record<string, number | null>;
 
+type ExamAttempt = {
+  id: string;
+  symbolNumber: string;
+  date: number;
+  score: { correct: number; total: number };
+  percent: number;
+  elapsedSeconds: number;
+  totalSeconds: number;
+  answers: AnswerMap;
+  questionIds: string[];
+};
+
 const TOTAL_QUESTIONS = 100;
 const EXAM_DURATION_MINUTES = 90;
+
+// LocalStorage utilities
+const STORAGE_KEY = 'nhpc_exam_attempts';
+
+function saveExamAttempt(attempt: ExamAttempt): void {
+  try {
+    const existing = getExamAttempts();
+    existing.push(attempt);
+    // Keep only last 50 attempts to avoid storage issues
+    const recent = existing.slice(-50);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(recent));
+  } catch (error) {
+    console.error('Failed to save exam attempt:', error);
+  }
+}
+
+function getExamAttempts(): ExamAttempt[] {
+  try {
+    const data = localStorage.getItem(STORAGE_KEY);
+    return data ? JSON.parse(data) : [];
+  } catch (error) {
+    console.error('Failed to load exam attempts:', error);
+    return [];
+  }
+}
+
+function getAttemptsBySymbol(symbolNumber: string): ExamAttempt[] {
+  return getExamAttempts().filter(attempt => attempt.symbolNumber === symbolNumber);
+}
 
 function useCountdown(seconds: number, isRunning: boolean) {
   const [remaining, setRemaining] = useState(seconds);
@@ -64,6 +105,7 @@ export default function App() {
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [submittedAt, setSubmittedAt] = useState<number | null>(null);
   const [examTimerStarted, setExamTimerStarted] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   const totalSeconds = EXAM_DURATION_MINUTES * 60;
   const isRunning = phase === 'exam' && examTimerStarted;
@@ -86,10 +128,29 @@ export default function App() {
 
   function handleLogin(symbol: string) {
     if (symbol.trim()) {
-      setSymbolNumber(symbol.trim());
+      const trimmedSymbol = symbol.trim();
+      setSymbolNumber(trimmedSymbol);
+      // Store login name
+      try {
+        localStorage.setItem('nhpc_last_login', trimmedSymbol);
+      } catch (error) {
+        console.error('Failed to save login:', error);
+      }
       setPhase('dashboard');
     }
   }
+
+  // Load last login on mount
+  useEffect(() => {
+    try {
+      const lastLogin = localStorage.getItem('nhpc_last_login');
+      if (lastLogin) {
+        // Optionally auto-fill but don't auto-login
+      }
+    } catch (error) {
+        console.error('Failed to load last login:', error);
+      }
+  }, []);
 
   function handleLogout() {
     setSymbolNumber('');
@@ -122,7 +183,27 @@ export default function App() {
 
   function handleSubmit() {
     if (phase !== 'exam') return;
-    setSubmittedAt(Date.now());
+    const submitTime = Date.now();
+    setSubmittedAt(submitTime);
+    
+    // Calculate elapsed seconds
+    const calculatedElapsed = startedAt ? Math.max(0, Math.floor((submitTime - startedAt) / 1000)) : 0;
+    
+    // Save exam attempt
+    const percent = examQuestions.length === 0 ? 0 : Math.round((score.correct / examQuestions.length) * 100);
+    const attempt: ExamAttempt = {
+      id: `attempt_${submitTime}_${Math.random().toString(36).substr(2, 9)}`,
+      symbolNumber: symbolNumber,
+      date: submitTime,
+      score: score,
+      percent: percent,
+      elapsedSeconds: calculatedElapsed,
+      totalSeconds: totalSeconds,
+      answers: { ...answers },
+      questionIds: examQuestions.map(q => q.id)
+    };
+    saveExamAttempt(attempt);
+    
     setPhase('result');
   }
 
@@ -151,6 +232,10 @@ export default function App() {
     return Math.max(0, Math.floor((end - startedAt) / 1000));
   }, [startedAt, submittedAt]);
 
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', isDarkTheme ? 'dark' : 'light');
+  }, [isDarkTheme]);
+
   return (
     <div className="app">
       <Header 
@@ -162,6 +247,9 @@ export default function App() {
         onSubmit={phase === 'exam' && examTimerStarted ? handleSubmit : undefined}
         onRestart={phase === 'review' ? handleRestart : undefined}
         remainingSeconds={phase === 'exam' && examTimerStarted ? remainingSeconds : null}
+        isDarkTheme={isDarkTheme}
+        onToggleTheme={() => setIsDarkTheme(!isDarkTheme)}
+        onViewProgress={symbolNumber && phase !== 'exam' ? () => setPhase('progress') : undefined}
       />
       <div className="container">
         {phase === 'exam' ? (
@@ -182,6 +270,13 @@ export default function App() {
               <DashboardView 
                 symbolNumber={symbolNumber}
                 onStartExam={handleStartExam}
+              />
+            )}
+
+            {phase === 'progress' && (
+              <ProgressView
+                symbolNumber={symbolNumber}
+                onBack={() => setPhase('dashboard')}
               />
             )}
 
@@ -220,6 +315,9 @@ function Header({
   onSubmit,
   onRestart,
   remainingSeconds,
+  isDarkTheme,
+  onToggleTheme,
+  onViewProgress,
 }: {
   symbolNumber: string;
   onLogout: () => void;
@@ -229,6 +327,9 @@ function Header({
   onSubmit?: () => void;
   onRestart?: () => void;
   remainingSeconds: number | null;
+  isDarkTheme: boolean;
+  onToggleTheme: () => void;
+  onViewProgress?: () => void;
 }) {
   const isLowTime = remainingSeconds !== null && remainingSeconds < 300; // Less than 5 minutes
 
@@ -243,6 +344,23 @@ function Header({
           </div>
         </div>
         <div className="header-actions">
+          <button 
+            className="btn btn-secondary" 
+            onClick={onToggleTheme}
+            style={{ padding: '8px 12px', minWidth: 'auto' }}
+            title={isDarkTheme ? 'Switch to light theme' : 'Switch to dark theme'}
+          >
+            {isDarkTheme ? '☀️' : '🌙'}
+          </button>
+          {onViewProgress && (
+            <button 
+              className="btn btn-secondary" 
+              onClick={onViewProgress}
+              title="View exam attempts and progress"
+            >
+              📊 Attempts
+            </button>
+          )}
           {symbolNumber && (
             <div className="symbol-display">
               Symbol: <strong>{symbolNumber}</strong>
@@ -282,6 +400,18 @@ function Header({
 
 function LoginView({ onLogin }: { onLogin: (symbol: string) => void }) {
   const [symbol, setSymbol] = useState('');
+  const [lastLogin, setLastLogin] = useState<string>('');
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('nhpc_last_login');
+      if (saved) {
+        setLastLogin(saved);
+      }
+    } catch (error) {
+      console.error('Failed to load last login:', error);
+    }
+  }, []);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -293,6 +423,11 @@ function LoginView({ onLogin }: { onLogin: (symbol: string) => void }) {
       <div style={{ textAlign: 'center' }}>
         <h1 className="title">NHPC License Exam</h1>
         <p className="muted">Enter your symbol number to continue</p>
+        {lastLogin && (
+          <p className="muted" style={{ fontSize: 12, marginTop: 8 }}>
+            Last login: {lastLogin}
+          </p>
+        )}
       </div>
 
       <form onSubmit={handleSubmit} className="grid" style={{ gap: 16 }}>
@@ -302,7 +437,7 @@ function LoginView({ onLogin }: { onLogin: (symbol: string) => void }) {
             type="text"
             value={symbol}
             onChange={e => setSymbol(e.target.value)}
-            placeholder="Enter your symbol number"
+            placeholder={lastLogin ? `Last: ${lastLogin}` : "Enter your symbol number"}
             required
             autoFocus
           />
@@ -557,6 +692,99 @@ function Stat({ label, value }: { label: string; value: string }) {
     <div className="card" style={{ padding: 16 }}>
       <div className="muted" style={{ marginBottom: 6 }}>{label}</div>
       <div style={{ fontWeight: 700, fontSize: 22 }}>{value}</div>
+    </div>
+  );
+}
+
+function ProgressView({
+  symbolNumber,
+  onBack,
+}: {
+  symbolNumber: string;
+  onBack: () => void;
+}) {
+  const attempts = useMemo(() => {
+    return getAttemptsBySymbol(symbolNumber).sort((a, b) => b.date - a.date);
+  }, [symbolNumber]);
+
+  function formatDate(timestamp: number): string {
+    const date = new Date(timestamp);
+    return date.toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+
+  if (attempts.length === 0) {
+    return (
+      <div className="grid" style={{ gap: 18 }}>
+        <div>
+          <h2 className="title">Exam Progress</h2>
+          <p className="muted">No exam attempts yet. Complete an exam to see your progress here.</p>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <button className="btn btn-secondary" onClick={onBack}>
+            Back to Dashboard
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const bestScore = Math.max(...attempts.map(a => a.percent));
+  const averageScore = Math.round(attempts.reduce((acc, a) => acc + a.percent, 0) / attempts.length);
+
+  return (
+    <div className="grid" style={{ gap: 18 }}>
+      <div className="row space">
+        <div>
+          <h2 className="title">Exam Progress</h2>
+          <p className="muted">Your exam attempts and performance history</p>
+        </div>
+        <button className="btn btn-secondary" onClick={onBack}>
+          Back to Dashboard
+        </button>
+      </div>
+
+      <div className="grid cols-3" style={{ gap: 12 }}>
+        <Stat label="Total Attempts" value={attempts.length.toString()} />
+        <Stat label="Best Score" value={`${bestScore}%`} />
+        <Stat label="Average Score" value={`${averageScore}%`} />
+      </div>
+
+      <div>
+        <h3 className="section-title" style={{ marginBottom: 16 }}>Attempt History</h3>
+        <div className="grid" style={{ gap: 12 }}>
+          {attempts.map((attempt, idx) => (
+            <div key={attempt.id} className="card" style={{ padding: 16 }}>
+              <div className="row space">
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 4 }}>
+                    Attempt #{attempts.length - idx}
+                  </div>
+                  <div className="muted" style={{ fontSize: 13 }}>
+                    {formatDate(attempt.date)}
+                  </div>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <div style={{ fontWeight: 700, fontSize: 20, color: 'var(--text)' }}>
+                    {attempt.percent}%
+                  </div>
+                  <div className="muted" style={{ fontSize: 13 }}>
+                    {attempt.score.correct} / {attempt.score.total}
+                  </div>
+                </div>
+              </div>
+              <div style={{ marginTop: 12, fontSize: 13, color: 'var(--muted)' }}>
+                Time: {formatSeconds(attempt.elapsedSeconds)} / {formatSeconds(attempt.totalSeconds)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
