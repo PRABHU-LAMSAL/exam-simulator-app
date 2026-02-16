@@ -533,8 +533,7 @@ function ExamView({
           const selected = answers[q.id];
           return (
             <div key={q.id} className="question-item">
-              <div className="question-number">Question {idx + 1}</div>
-              <div className="question-text">{q.text}</div>
+              <div className="question-text"><span className="question-q">Q{idx + 1}.</span> {q.text}</div>
               <div className="options-list">
                 {q.options.map((opt, optIdx) => (
                   <label
@@ -662,16 +661,16 @@ function ReviewView({
                   {user === q.answerIndex ? '✅ Correct' : '❌ Incorrect'}
                 </div>
               </div>
-              <div className="grid" style={{ marginTop: 10 }}>
+              <div className="options-list options-list-review" style={{ marginTop: 10 }}>
                 {q.options.map((opt, i) => {
                   const isCorrect = i === q.answerIndex;
                   const isSelected = i === user;
                   return (
-                    <div key={i} className={`option ${isCorrect ? 'correct' : ''} ${isSelected && !isCorrect ? 'incorrect' : ''}`}>
-                      <div>{opt}</div>
-                      <div style={{ marginLeft: 'auto', fontWeight: 700, fontSize: 18 }}>
+                    <div key={i} className={`option option-horizontal ${isCorrect ? 'correct' : ''} ${isSelected && !isCorrect ? 'incorrect' : ''}`}>
+                      <span>{String.fromCharCode(65 + i)}. {opt}</span>
+                      <span style={{ fontWeight: 700, fontSize: 18 }}>
                         {isCorrect ? '✓' : isSelected && !isCorrect ? '✗' : ''}
-                      </div>
+                      </span>
                     </div>
                   );
                 })}

@@ -376,6 +376,24 @@ body {
   opacity: 0.7;
 }
 
+.options-list-review {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.options-list-review .option {
+  border: none;
+  background: transparent;
+  padding: 4px 0;
+}
+
+.option-horizontal {
+  flex: 1 1 180px;
+  min-width: 0;
+}
+
 /* Exam Container - Vertical Scrolling */
 .exam-container {
   display: flex;
@@ -404,31 +422,32 @@ body {
   border-bottom: none;
 }
 
-.question-number {
-  font-size: 16px;
+.question-q {
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 8px;
 }
 
 .options-list {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
   margin-left: 0;
 }
 
 .option-label-simple {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
   cursor: pointer;
-  padding: 8px 0;
+  padding: 4px 0;
   transition: opacity 0.2s ease;
+  min-width: 0;
+  flex: 1 1 180px;
 }
 
 .option-label-simple:hover {
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 .option-label-simple.selected {
